@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, user-scalable=no, width=device-width"
+    />
+    <title>HELLO, AMAP!</title>
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+        securityJsCode: "bfbddea52776b8fe19079cb7d7b5acf6",
+      };
+    </script>
+    <script
+      type="text/javascript"
+      src="https://webapi.amap.com/maps?v=2.0&key=2fc5c7efe146bad006ab048bddfde481"
+    ></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="map.js"></script>
+    <script defer type="text/javascript" src="socket.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="box full">
+      <div class="box" id="map"></div>
+      <script type="text/javascript">
+        createMap();
+      </script>
+      <div class="box" id="point_view"></div>
+    </div>
+    <div class="box full">
+      <button type="button" onclick="putWaypoints()">Submit Way Points</button>
+      <button type="button" onclick="clearWaypoints()">Clear Way Points</button>
+      <button type="button" onclick="drawRoute()">Draw Route</button>
+      <button type="button" onclick="copterFlight()">Start Flight</button>
+      <button type="button" onclick="copterHover()">Hover</button>
+      <button type="button" onclick="copterFlight()">Resume</button>
+      <button type="button" onclick="copterRestore()">Restore</button>
+    </div>
+    <script type="text/javascript">
+      setInterval(() => {
+        refreshCopterView();
+      }, 1000);
+    </script>
+  </body>
+</html>
