@@ -5,6 +5,10 @@ let clickPosition;
 let clickTarget;
 let markerId = 0;
 let copterMarker;
+let start;
+let end;
+let driving;
+let waypoints = new Array();
 
 class Point {
   constructor(id, lng, lat, x, y) {
@@ -39,6 +43,14 @@ function createMap() {
     mainMap.addControl(toolbar);
   });
 
+  AMap.plugin("AMap.Driving", function () {
+    driving = new AMap.Driving({
+      policy: 0, //驾车路线规划策略，0是速度优先的策略
+      map: mainMap,
+      panel: "panel",
+    });
+  });
+
   mainMap.on("rightclick", function (ev) {
     contextMenu.open(mainMap, ev.lnglat);
     clickPosition = ev.lnglat;
@@ -49,11 +61,35 @@ function createMap() {
   markerContextMenu.addItem("Remove waypoint", removeSinglePoint, 0);
   markerContextMenu.addItem("Set as start point", setStart, 1);
   markerContextMenu.addItem("Set as destination", setDestination, 2);
+  markerContextMenu.addItem("Set as waypoint", setWaypoint, 3);
 }
 
-function setStart() {}
+function searchRoute() {
+  var opts = {
+    waypoints: waypoints,
+  };
+  driving.search(start, end, opts, function (status, result) {
+    if (status == "complete") {
+      console.log("search complete");
+    } else {
+      console.log("search failed" + result);
+    }
+  });
+}
 
-function setDestination() {}
+function setStart() {
+  start = [clickPosition.lng, clickPosition.lat];
+  console.log(start);
+}
+
+function setDestination() {
+  end = [clickPosition.lng, clickPosition.lat];
+  console.log(end);
+}
+
+function setWaypoint() {
+  waypoints.push([clickPosition.lng, clickPosition.lat]);
+}
 
 function addSinglePoint() {
   markerId = markerId + 1;
@@ -108,9 +144,10 @@ function drawRoute() {
   mainMap.add(routeGraph);
 }
 
-
 function drawCopterMarker(copterStatus) {
-  position = mainMap.containerToLngLat(new AMap.Pixel(copterStatus[0], copterStatus[1]));
+  position = mainMap.containerToLngLat(
+    new AMap.Pixel(copterStatus[0], copterStatus[1])
+  );
   copterMarker = new AMap.Marker({
     map: mainMap,
     position: position,

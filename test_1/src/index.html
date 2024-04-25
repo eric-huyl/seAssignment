@@ -25,6 +25,7 @@
   <body>
     <div class="box full">
       <div class="box" id="map"></div>
+      <div id="panel"></div>
       <script type="text/javascript">
         createMap();
       </script>
@@ -38,11 +39,12 @@
       <button type="button" onclick="copterHover()">Hover</button>
       <button type="button" onclick="copterFlight()">Resume</button>
       <button type="button" onclick="copterRestore()">Restore</button>
+      <button type="button" onclick="searchRoute()">Search Route</button>
     </div>
     <script type="text/javascript">
-      setInterval(() => {
-        refreshCopterView();
-      }, 1000);
+//      setInterval(() => {
+//        refreshCopterView();
+//      }, 1000);
     </script>
   </body>
 </html>

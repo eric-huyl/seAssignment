@@ -32,7 +32,7 @@ function setupSocket() {
     console.log("Connection closed");
     setTimeout(function () {
       setupSocket();
-    }, 2000);
+    }, 10000);
   };
 }
 
