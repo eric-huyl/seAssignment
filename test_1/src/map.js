@@ -26,7 +26,6 @@ class Point {
 
 function createMap() {
   mainMap = new AMap.Map("map", {
-    mapStyle: "amap://styles/whitesmoke",
     center: [108.833538, 34.123186],
     viewMode: "2D",
     zoom: 15,

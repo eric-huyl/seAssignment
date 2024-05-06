@@ -94,7 +94,6 @@ def messageHandler(message) -> str:
     for point in ROUTE:
         route.append([point['x'], point['y']])
     sc.loadRoute(myCopter, route)
-    consoleLog(str(myCopter.route), 'test')
     resObjectJSON = resObject.encode()
     return resObjectJSON
 
@@ -103,7 +102,7 @@ async def receiver(websocket, path):
     async for message in websocket:
         consoleLog(f'Receive: {message}', 'log')
         response = messageHandler(message)
-        consoleLog(f'Send: {response}', 'log')
+        consoleLog(f'Send: {response}', 'success')
         await websocket.send(response)
 
 

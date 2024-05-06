@@ -47,9 +47,19 @@ function putWaypoint() {
 
 function refreshMarkerView() {
   var pointList = document.createElement("ul");
+  pointList.classList.add('ul_class');
   POINTS.forEach((point) => {
     const listItem = document.createElement("li");
-    listItem.textContent = `${point.id} ${point.lng}  ${point.lat} ${point.x}, ${point.y}`;
+    const li_one = document.createElement("span");
+    const li_two = document.createElement("span");
+    listItem.textContent = ` point ${Math.round(point.id)}:   `;
+    li_one.textContent =`(${Math.round(point.lng*1000)/1000} E,   ${Math.round(point.lat*1000)/1000} N )`;
+    li_two.textContent = ` (${Math.round(point.x)} px,  ${Math.round(point.y)} px)`;
+    listItem.classList.add('list_new');
+    li_one.classList.add('list_new2');
+    li_two.classList.add('list_new3');
+    listItem.appendChild(li_one);
+    listItem.appendChild(li_two);
     pointList.appendChild(listItem);
   });
   document.getElementById("point_view").innerHTML = "";

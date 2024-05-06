@@ -6,7 +6,7 @@
       name="viewport"
       content="initial-scale=1.0, user-scalable=no, width=device-width"
     />
-    <title>HELLO, AMAP!</title>
+    <title>HELLO, MAP!</title>
     <script type="text/javascript">
       window._AMapSecurityConfig = {
         securityJsCode: "bfbddea52776b8fe19079cb7d7b5acf6",
@@ -23,23 +23,24 @@
   </head>
 
   <body>
-    <div class="box full">
-      <div class="box" id="map"></div>
-      <div id="panel"></div>
+    <div id="panel"></div>
+    <div class="box1 full">
+      <div class="box_inside1" id="map"></div>
+      
       <script type="text/javascript">
         createMap();
       </script>
-      <div class="box" id="point_view"></div>
+      <div class="box_inside2" id="point_view"></div>
     </div>
-    <div class="box full">
-      <button type="button" onclick="putWaypoints()">Submit Way Points</button>
+    <div class="box2 full">
+      <button type="button" onclick="putWaypoints()" class="button_side1">Submit Way Points</button>
       <button type="button" onclick="clearWaypoints()">Clear Way Points</button>
       <button type="button" onclick="drawRoute()">Draw Route</button>
       <button type="button" onclick="copterFlight()">Start Flight</button>
       <button type="button" onclick="copterHover()">Hover</button>
       <button type="button" onclick="copterFlight()">Resume</button>
       <button type="button" onclick="copterRestore()">Restore</button>
-      <button type="button" onclick="searchRoute()">Search Route</button>
+      <button type="button" onclick="searchRoute()" class="button_side2">Search Route</button>
     </div>
     <script type="text/javascript">
 //      setInterval(() => {

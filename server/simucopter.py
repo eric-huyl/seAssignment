@@ -1,7 +1,5 @@
 import math
-import threading
 import time
-import utils
 V = 5
 REFRESHRATE = 10
 
@@ -26,11 +24,6 @@ class Copter:
 
 def flight(copter: Copter):
     copter.mode = 'flight'
-    flight_thread = threading.Thread(target=flightSimu, args=(copter,))
-    flight_thread.start()
-    flight_thread.join()
-    copter.mode = 'hover'
-    utils.consoleLog("Flight is over", 'success')
 
 def loadRoute(copter: Copter, route):
     copter.route = route
