@@ -70,6 +70,7 @@ function searchRoute() {
   driving.search(start, end, opts, function (status, result) {
     if (status == "complete") {
       console.log(result);
+      routeInfo = result
     } else {
       console.log("search failed" + result);
     }

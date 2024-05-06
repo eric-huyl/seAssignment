@@ -62,11 +62,3 @@ for point1 in coordinates:
         if point1 != point2:
             graph[point1][point2] = euclidean_distance(
                 coordinates[point1], coordinates[point2])
-
-# 起点、终点
-start = 'A'
-end = 'D'
-
-# 计算路径
-path = shortest_path(graph, start, end)
-print("最短路径:", path)

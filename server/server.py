@@ -81,26 +81,28 @@ def messageHandler(message) -> str:
             ROUTE = pathfinder.find(waypoints)
             resObject.type = 'ack_get'
             resObject.content = 'route'
-            resObject.data = ROUTE
+            resObject.data = ''
         else:
             consoleLog('Unknown put command', 'fail')
             resObject.quickAck('ack', msgObject)
+    elif msgObject.type == 'Hello':
+        consoleLog('Connected!', 'success')
+        resObject.quickAck('helloAck', msgObject)
     else:
         consoleLog('Unknown message type', 'fail')
         resObject.quickAck('err', msgObject)
 
-    WAYPOINTS = waypoints
-    route = []
-    for point in ROUTE:
-        route.append([point['x'], point['y']])
-    sc.loadRoute(myCopter, route)
+    WAYPOINTS = waypointInfoParser(waypoints)
     resObjectJSON = resObject.encode()
     return resObjectJSON
 
 
+def waypointInfoParser(waypoints):
+    return waypoints
+
 async def receiver(websocket, path):
     async for message in websocket:
-        consoleLog(f'Receive: {message}', 'log')
+        consoleLog(f'Receive: {message}', 'test')
         response = messageHandler(message)
         consoleLog(f'Send: {response}', 'success')
         await websocket.send(response)
@@ -108,7 +110,9 @@ async def receiver(websocket, path):
 
 async def main():
     async with websockets.serve(receiver, "localhost", 8765):
+        consoleLog(f'Server listening!', 'success')
         await asyncio.Future()
 
 if __name__ == '__main__':
     asyncio.run(main())
+    consoleLog(f'Server shutdown', 'test')

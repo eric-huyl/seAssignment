@@ -1,11 +1,7 @@
 const { invoke } = window.__TAURI__.tauri;
 let POINTS = Array();
-let ROUTE = Array();
+let routeInfo;
 let COPTERSTATUS;
-
-function putWaypoints() {
-  sendMessage("put", "waypoint", POINTS);
-}
 
 function clearWaypoints() {
   POINTS = [];
@@ -42,7 +38,7 @@ function getStatus() {
 }
 
 function putWaypoint() {
-  sendMessage("put", "waypoint");
+  sendMessage("put", "waypoint", routeInfo);
 }
 
 function refreshMarkerView() {

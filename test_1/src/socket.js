@@ -19,7 +19,7 @@ function setupSocket() {
   mainWs = new WebSocket("ws://localhost:8765");
   mainWs.onopen = function () {
     console.log("Connected");
-    sendMessage('put', 's', ['12', '34'])
+    sendMessage('Hello', '', '')
   };
 
   mainWs.onmessage = function (ev) {
