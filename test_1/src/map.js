@@ -70,7 +70,7 @@ function searchRoute() {
   };
   driving.search(start, end, opts, function (status, result) {
     if (status == "complete") {
-      console.log("search complete");
+      console.log(result);
     } else {
       console.log("search failed" + result);
     }
@@ -120,7 +120,7 @@ function addSinglePoint() {
 
 function removeSinglePoint() {
   targetId = clickTarget._opts.extData.id;
-  POINTS = POINTS.filter((elem) => elem.id !== targetId);
+  waypoints = waypoints.filter((elem) => elem.id !== targetId);
   mainMap.remove(clickTarget);
   refreshMarkerView();
 }
